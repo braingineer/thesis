@@ -1,4 +1,4 @@
-% Les Clowney 
+% Les Clowney
 % ru-thesis document style (LaTeX)
 %  ruthesis.cls is based on the LaTeX documentstyle ruthesis.sty, to which
 %  both Dave Steiner and Tara Madhyastha contributed.
@@ -28,6 +28,8 @@
 \ProcessOptions
 \LoadClass[\@pointsize]{report}
 
+\usepackage{subfiles}
+
 % ***********************************************************************
 % Sumary of New Commands (many are not to be used outside of the style file)
 %
@@ -41,16 +43,16 @@
 %       \pagestyletopright. Place page numbers at topright corner.
 %       \phd    (if invoked then \phdtrue is set.
 %                The default is  not to be getting one. The command
-%                \degree may be ignored if this command is 
+%                \degree may be ignored if this command is
 %                used. The default is for the Master of Science.)
 %       \degree{type of degree, e.g. Master of Science}
 %               The default is Master of Science (or Doctor of Philosophy if
-%                \phd is used.) 
+%                \phd is used.)
 %       **** joint  Degrees ****
 %               The joint degree is always(?) offered in conjunction
 %               with The University of Medicine and Dentistry of New
 %               Jersey. Thus for a joint degree \jointumdnj will
-%               probably always be used.                
+%               probably always be used.
 %       \jointumdnj (Invokes the command \joint with the proper argument
 %               for the University of Medicine of and Dentistry.)
 %       \joint{argument}
@@ -67,7 +69,7 @@
 %               (The default dates used will be those at which the
 %                document was prepared)
 %      \begin-end{vita}  (begin single spacing after this point for the vita)
-%       ******* Booleans ******* 
+%       ******* Booleans *******
 %       \ifpagestyletopright (invoke \pagestyle{topright})
 %       \ifdraft  (Will do some things differently if draft. Set by \draft)
 %       \ifcopyright (Add a copyright notice? (Set by \copyrightpage)
@@ -78,14 +80,14 @@
 %       \ifjoint (set by  \joint)
 %       \iffigures
 %       \iftables
-%       \ifafterpreface (afterpreface sections pagenumber must be at topright 
+%       \ifafterpreface (afterpreface sections pagenumber must be at topright
 %               corner. If user has chosen a hader then it must be overridden.)
 %               (Produce a List of figures? The default is to do so.)
 %       \tablestrue
 %               (Produce a List of tables?)
 %       \begin/end{descriptionlist} (Basically a modified  \description.)
 %       \fullpagefigure Creates a figure where the page is a vbox whose
-%                height is \textheight. 
+%                height is \textheight.
 
 
 
@@ -93,11 +95,11 @@
 %          **** PAGE LAYOUT ****
 % We need 1" (~72pt) margins except on the binding edge, where it is 1 1/2".
 % They are a bit larger to handle lines with overfull boxes.
-% 
+%
 \@twocolumnfalse
 \@twosidefalse
 \oddsidemargin 36bp \evensidemargin 36bp  %%% was 40 and 25 -dks
-\marginparwidth 40bp \marginparsep 10bp 
+\marginparwidth 40bp \marginparsep 10bp
 \topmargin -47bp        % Default margin is  73 points-- make 1/2 that
                         % plus a bit more to get page 1/2 inch down.
 \headheight 11bp        % Height of box containing running head.
@@ -108,62 +110,62 @@
 \textwidth 412bp        % Give 92pt right margin;72 + extra for overfull boxes.
 % disappeared from LaTeX\footheight 11bp        %    Height of box containing running foot.
 \footnotesep \baselineskip
-\footskip 36bp          %    Distance from baseline of box containing foot 
+\footskip 36bp          %    Distance from baseline of box containing foot
                         %    to baseline of last line of text.
 \parindent 3.5ex
-\parskip 1bp plus 1bp 
+\parskip 1bp plus 1bp
 \setcounter{tocdepth}{3} % Put subsubsections in toc (set to 2 in
-                         % report.sty). [lsc] 
+                         % report.sty). [lsc]
 \skip\footins 15pt plus3pt minus3pt % Add space between text and
                                     % footnotes.
 
 % *******  Documentstyle Modifications *******
 \brokenpenalty=10000 % Do not break pages at hyphens.
 \def\baselinestretch{1.6}  % 1.6 space document ~ doublespace.
-\@addtoreset{equation}{chapter} % Set things up so that theequation, 
-        % thefigure, and thetable counters are reset by incrementing 
+\@addtoreset{equation}{chapter} % Set things up so that theequation,
+        % thefigure, and thetable counters are reset by incrementing
         % thechaphter. (The others are correct in the report style.)
 
 
 % **** Make changes to the formats of table of contents and sectioning ****
-% **** commands . 
+% **** commands .
 %  Center chapter headings, add the string ``chapter #'', and reduce the
-%  font size that is used in the report style. Must  modify fonts used for 
+%  font size that is used in the report style. Must  modify fonts used for
 % other sectioning commands also.
 \newcommand\chapter@topskip{\null\vskip40bp} % Chapters sink this much before
                                       % output.
 \newcommand\chapter@bottomskip{\vskip30bp} % Chapters sink this much
-                                         % after output. 
+                                         % after output.
 \def\@makechapterhead#1{\chapter@topskip { \parindent 0pt \centering
- \ifnum \c@secnumdepth >\m@ne {\Large \bf \@chapapp{} \thechapter} 
-   \par  
-   \vskip7bp 
- \fi 
- {\Large \bf #1}\par 
+ \ifnum \c@secnumdepth >\m@ne {\Large \bf \@chapapp{} \thechapter}
+   \par
+   \vskip7bp
+ \fi
+ {\Large \bf #1}\par
  \nobreak \chapter@bottomskip }}
 
 % Chapter with only a string heading--as in unnumberedsections.
 \renewcommand{\@makeschapterhead}[1]{\chapter@topskip{ \parindent 0pt \centering
-{\Large\bfseries#1}\par 
+{\Large\bfseries#1}\par
  \nobreak \chapter@bottomskip } }
 \renewcommand\chapter{\clearpage\global\@topnum\z@
- \@afterindentfalse \secdef\@chapter\@schapter} 
+ \@afterindentfalse \secdef\@chapter\@schapter}
 \def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
  \refstepcounter{chapter}
  \typeout{\@chapapp\space\thechapter.}
  \addcontentsline{toc}{chapter}{\protect
- \numberline{\thechapter}#1} \else 
+ \numberline{\thechapter}#1} \else
  \addcontentsline{toc}{chapter}{#1}\fi
  \chaptermark{#1}
  % Don't add extra space to lists of figures and tables after chapters.
  %  \addtocontents{lof}{\protect\addvspace{10bp}}
  %  \addtocontents{lot}{\protect\addvspace{10bp}}
  \if@twocolumn
- \@topnewpage[\@makechapterhead{#2}] 
+ \@topnewpage[\@makechapterhead{#2}]
  \else \@makechapterhead{#2}
- \@afterheading \fi} 
+ \@afterheading \fi}
 \renewcommand{\@schapter}[1]{\if@twocolumn \@topnewpage[\@makeschapterhead{#1}]
- \else \@makeschapterhead{#1} 
+ \else \@makeschapterhead{#1}
  \@afterheading\fi}
 
 
@@ -177,37 +179,47 @@
 \def\numberline#1{\advance\hangindent\@tempdima \hbox to\@tempdima{#1.\hfil}}
 
 \newcommand{\l@unnumberedsection}[2]{\pagebreak[3]% \vskip 1em plus 1bp
-\parindent \z@ \rightskip \@pnumwidth 
- \parfillskip -\@pnumwidth 
-\interlinepenalty\@M\leavevmode 
+\parindent \z@ \rightskip \@pnumwidth
+ \parfillskip -\@pnumwidth
+\interlinepenalty\@M\leavevmode
 \@tempdima 1.5em\relax \begingroup \bfseries
-    #1\leaders\hbox{$\m@th \mkern \@dotsep mu.\mkern \@dotsep mu$}% \hfill 
+    #1\leaders\hbox{$\m@th \mkern \@dotsep mu.\mkern \@dotsep mu$}% \hfill
 \hskip 0pt plus 1filll % new line
    \hbox to\@pnumwidth{\hfil\rm #2}\endgroup\par}
 
 % Add dotted leaders for chapters in the table of contents.
 \renewcommand{\l@chapter}[2]{\pagebreak[3]\vskip 1em plus 1bp
-\parindent \z@ \rightskip \@pnumwidth 
- \parfillskip -\@pnumwidth 
-\interlinepenalty\@M\leavevmode 
-\@tempdima 1.5em\relax \begingroup 
-    \textbf{#1}\leaders\hbox{$\m@th \mkern \@dotsep mu.\mkern \@dotsep mu$}% \hfill 
+\parindent \z@ \rightskip \@pnumwidth
+ \parfillskip -\@pnumwidth
+\interlinepenalty\@M\leavevmode
+\@tempdima 1.5em\relax \begingroup
+    \textbf{#1}\leaders\hbox{$\m@th \mkern \@dotsep mu.\mkern \@dotsep mu$}% \hfill
 \hskip 0pt plus 1filll % new line
    \hbox to\@pnumwidth{\hfil\rm #2}\endgroup\par}
 
 
 
-\def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus 
+\def\section{\@startsection {section}{1}{\z@}{-3.5ex plus -1ex minus
  -.2ex}{2.3ex plus .2ex}{\large\bfseries}}
-\def\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex plus -1ex minus 
+\def\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex plus -1ex minus
  -.2ex}{1.5ex plus .2ex}{\large\bfseries}}
 \def\subsubsection{\@startsection{subsubsection}{3}{\z@}{-3.25ex plus
  -1ex minus -.2ex}{1.5ex plus .2ex}{\normalsize\bfseries}}
 \let\paragraph=\subsubsection
 
-% single space bibliography, quotations and verse. 
+%%%% bib
 
-\def\thebibliography#1{\def\baselinestretch{1}\@normalsize 
+\RequirePackage{natbib}
+% for citation commands in the .tex, authors can use:
+% \citep, \citet, and \citeyearpar for compatibility with natbib, or
+% \cite, \newcite, and \shortcite for compatibility with older ACL .sty files
+\renewcommand\cite{\citep}  % to get "(Author Year)" with natbib
+\newcommand\shortcite{\citeyearpar}% to get "(Year)" with natbib
+\newcommand\newcite{\citet} % to get "Author (Year)" with natbib
+
+% single space bibliography, quotations and verse.
+
+\def\thebibliography#1{\def\baselinestretch{1}\@normalsize
 \unnumberedsection{References}\list
  {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
  \advance\leftmargin\labelsep
@@ -218,15 +230,15 @@
 % end bib with a new page
 \def\endthebibliography{\endlist}
 
-% Rutgers requires that quotations be indented at the left and 
+% Rutgers requires that quotations be indented at the left and
 % flush at the right margin. Center Verses.
 \renewcommand\quotation{\def\baselinestretch{1}\@normalsize\list{}{%
 \rightmargin -\z@ \listparindent 0.5ex
 \itemindent\leftmargin\parsep 0pt}\item[]}
 \let\endquotation=\endlist
 
-\renewcommand\verse{\def\baselinestretch{1}\@normalsize\let\\=\centercr 
- \list{}{\itemsep\z@ \itemindent -1.5em\listparindent \itemindent 
+\renewcommand\verse{\def\baselinestretch{1}\@normalsize\let\\=\centercr
+ \list{}{\itemsep\z@ \itemindent -1.5em\listparindent \itemindent
  \rightmargin\leftmargin\advance\leftmargin 1.5em}\item[]}
 \let\endverse=\endlist
 
@@ -241,7 +253,7 @@
 
 
 %  ***** Verbatim listing macro ****
-%  Code from the TeXbook for inputting  a file and listing it 
+%  Code from the TeXbook for inputting  a file and listing it
 %  verbatim in \texttt mode. Will not properly handle tabs.
 %  This code hasn't been rigorously tested so it should be used cautiously.
 %  Note that the left quote. "`", is redefined when the macro is finally used
@@ -281,14 +293,14 @@
                          \if\@tempa b\advance\@tempcnta 4\relax\fi
                          \if\@tempa p\advance\@tempcnta 8\relax\fi
          }\global\count\@currbox\@tempcnta}\@fltovf\fi
-    \global\setbox\@currbox\vbox\bgroup 
+    \global\setbox\@currbox\vbox\bgroup
     \def\baselinestretch{1}\@normalsize
     \boxmaxdepth\z@
     \hsize\columnwidth \@parboxrestore}
 
 % Single space footnotes.
 \long\def\@footnotetext#1{\insert\footins{\def\baselinestretch{1}\footnotesize
-    \interlinepenalty\interfootnotelinepenalty 
+    \interlinepenalty\interfootnotelinepenalty
     \splittopskip\footnotesep
     \splitmaxdepth \dp\strutbox \floatingpenalty \@MM
     \hsize\columnwidth \@parboxrestore
@@ -315,7 +327,7 @@
 \long\def\acknowledgements#1{\acknowledgementstrue\gdef\@acknowledgements{#1}}
 \long\def\dedication#1{\dedicationtrue\gdef\@dedication{#1}}
 \newcommand{\abbreviations}[1]{\abbreviationspagetrue\gdef\@abbreviations{#1}}
-% Use of the \initials command is being stopped but keep the macro for old 
+% Use of the \initials command is being stopped but keep the macro for old
 % files.
 \newcommand{\initials}[1]{\gdef\@initials{#1}} % Ph.D. et al.
 \newcommand{\degree}[1]{\phdfalse\gdef\@degree{#1}} % Master of Science et al.
@@ -324,8 +336,8 @@
 \newcommand{\jointumdnj}{\joint{The Graduate School of Biomedical Sciences\\
          the University of Medicine and  Dentistry of New Jersey\\}}
 \newcommand{\joint}[1]{\jointtrue\long\gdef\@jointwith{#1}} % if joint program
-                                                  % then who with?      
-\newcommand{\director}[1]{\gdef\@director{#1}}   
+                                                  % then who with?
+\newcommand{\director}[1]{\gdef\@director{#1}}
 \newcommand{\approvals}[1]{\gdef\@approvals{#1}}
 \newcommand{\submissionmonth}[1]{\gdef\@month{#1}}
 \newcommand{\submissionyear}[1]{\gdef\@year{#1}}
@@ -345,11 +357,11 @@
 \newif\ifdraft
 \newif\ifafterpreface
 \newif\ifcopyright \newif\iffigures\newif\iftables
-\newif\ifabstract   \newif\ifpreface \newif\ifacknowledgements 
+\newif\ifabstract   \newif\ifpreface \newif\ifacknowledgements
 \newif\ifdedication \newif\ifabbreviationspage
 \newif\ifjoint \newif\ifphd \newif\ifpagestyletopright
 
-%    ******* conditional defaults ******* 
+%    ******* conditional defaults *******
 \draftfalse
 \afterprefacefalse
 \pagestyletoprighttrue
@@ -357,23 +369,23 @@
 \prefacefalse
 \dedicationfalse
 \jointfalse
-\phdfalse % default is not for PhD (currently is  Master of Science) 
-\copyrightfalse  
-\abbreviationspagefalse 
+\phdfalse % default is not for PhD (currently is  Master of Science)
+\copyrightfalse
+\abbreviationspagefalse
 
 \newcommand\titlep{\vbox to \textheight{%
-        \parskip0pt 
+        \parskip0pt
         \parindent0pt
         \typeout{Title}
-        \null\nobreak\vskip 10bp 
+        \null\nobreak\vskip 10bp
         {\def\baselinestretch{1}\@normalsize
           \centering\Large\bfseries\uppercase\expandafter{\@title}\par\nobreak
          }
-        \vskip 2ex plus 2ex minus 2ex 
+        \vskip 2ex plus 2ex minus 2ex
         {\centering\bfseries
           BY \uppercase\expandafter{\@author}\par
           \nobreak
-          \vskip 4ex plus 2ex minus 2ex 
+          \vskip 4ex plus 2ex minus 2ex
           \ifdraft%
             {DRAFT VERSION CREATED ON \uppercase\expandafter{\today}\\}
           \else %
@@ -381,18 +393,18 @@
              Graduate School---\@campus \\
              Rutgers, The State University of New Jersey\\
              \ifjoint{in conjunction with\\ \obeylines\@jointwith\par}\fi
-             \ifjoint{in partial fulfillment of the requirements 
+             \ifjoint{in partial fulfillment of the requirements
                 for the\\ Joint Degree of}
                 \else %
                   in partial fulfillment of the requirements \\
-                  for the degree of\\ 
-             \fi 
+                  for the degree of\\
+             \fi
              \@degree\\
              Graduate Program in \@program\\
              \vskip 1ex
              Written under the direction of\\
              \@director\\
-             and approved by\\ 
+             and approved by\\
              \vskip 2ex plus 1ex minus 2ex
 
              \newcount\@aplines
@@ -430,7 +442,7 @@
         \pagenumbering{roman}
         \pagestyle{empty}
         \titlep
-        \ifcopyright\copyrightp\fi  
+        \ifcopyright\copyrightp\fi
         \c@page2 % set page counter so that next is 2
         \pagestyle{plain}
         \ifabstract{%
@@ -467,19 +479,19 @@
 
 
 \newcommand\afterpreface{%
-%  Insert all of the text between the title (and copyright) pages and the main 
+%  Insert all of the text between the title (and copyright) pages and the main
 %  body of the thesis.
         \ifpreface{\unnumberedsection{Preface}
                 \@preface}
-        \fi   
+        \fi
         \ifacknowledgements%
                 \unnumberedsection{Acknowledgements}
-                \@acknowledgements 
+                \@acknowledgements
         \fi
         \ifdedication%
                 \unnumberedsection{Dedication}
                 \@dedication
-        \fi 
+        \fi
 
         \tableofcontents
         \iftables%
@@ -532,14 +544,14 @@
   \refstepcounter{chapter}
   \typeout{\@chapapp\space\thechapter.}
   \addcontentsline{toc}{chapter}{\protect
-  \appnumberline{\thechapter}##1} \else 
+  \appnumberline{\thechapter}##1} \else
   \addcontentsline{toc}{chapter}{##1}\fi
   \chaptermark{##1}
   % Don't add extra space to lists of figures and tables after chapters.
   %  \addtocontents{lof}{\protect\addvspace{10pt}}
   %  \addtocontents{lot}{\protect\addvspace{10pt}}
   \if@twocolumn
-  \@topnewpage[\@makechapterhead{##2}] 
+  \@topnewpage[\@makechapterhead{##2}]
   \else \@makechapterhead{##2}
   \@afterheading \fi}}
 %
